@@ -10,7 +10,7 @@ ifeq ($(OS),Windows_NT)
 else
 	CLEANUP = rm -f
 	MKDIR = mkdir -p
-	TARGET_EXTENSION=out
+	TARGET_EXTENSION=
 endif
 
 .PHONY: clean
@@ -21,27 +21,25 @@ endif
 PATHU = unity/src/
 PATHS = src/
 PATHI = inc/
-PATH_MATH = inc/math
 PATHT = test/
 PATHB = build/
 PATHD = build/depends/
 PATHO = build/objs/
 PATHR = build/results/
+
 OBJS = $(patsubst %,$(PATHO)%,$(_OBJS))
-
-
 BUILD_PATHS = $(PATHB) $(PATHD) $(PATHO) $(PATHR)
 SRCT = $(wildcard $(PATHT)*.c)
 
-COMPILE=gcc -c	
+COMPILE=gcc -c
 LINK=gcc
 DEPEND=gcc -MM -MG -MF
-CFLAGS=-I. -I$(PATHU) -I$(PATHS) -I$(PATHI) -I$(PATH_MATH) -DTEST
+CFLAGS=-I. -I$(PATHU) -I$(PATHS) -I$(PATHI) -DTEST
 
+_OBJS = chapter_1.o \
+				tuple.o
 
-_OBJS = main.o tuple.o
-
-RESULTS = $(patsubst $(PATHT)Test%.c,$(PATHR)Test%.txt,$(SRCT) )
+RESULTS = $(patsubst $(PATHT)Test%.c,$(PATHR)Test%.txt,$(SRCT))
 
 PASSED = `grep -s PASS $(PATHR)*.txt`
 FAIL = `grep -s FAIL $(PATHR)*.txt`
@@ -61,8 +59,8 @@ test: $(BUILD_PATHS) $(RESULTS)
 $(PATHR)%.txt: $(PATHB)%.$(TARGET_EXTENSION)
 	-./$< > $@ 2>&1
 
-$(PATHB)Test%.$(TARGET_EXTENSION): $(PATHO)Test%.o $(PATHO)%.o $(PATHO)unity.o #$(PATHD)Test%.d
-	$(LINK) -o $@ $^
+$(PATHB)Test%.$(TARGET_EXTENSION): $(PATHO)Test%.o $(PATHO)%.o $(PATHO)unity.o 
+	$(LINK) -o $@ $^ -lm 
 
 $(PATHO)%.o:: $(PATHT)%.c
 	$(COMPILE) $(CFLAGS) $< -o $@
@@ -91,7 +89,7 @@ $(PATHR):
 compile: $(OBJS)
 
 install: $(OBJS)
-	$(LINK) -o program.$(TARGET_EXTENSION) $(OBJS)
+	$(LINK) -o raytracer $(OBJS) -lm
 
 format:
 	indent -linux $(PATHS)*.c $(PATHS)*.h $(PATHT)*.c
@@ -101,7 +99,7 @@ clean:
 	$(CLEANUP) $(PATHO)*.o
 	$(CLEANUP) $(PATHB)*.$(TARGET_EXTENSION)
 	$(CLEANUP) $(PATHR)*.txt
-	$(CLEANUP) bullshit.$(TARGET_EXTENSION)
+	rm raytracer
 
 .PRECIOUS: $(PATHB)Test%.$(TARGET_EXTENSION)
 .PRECIOUS: $(PATHD)%.d
