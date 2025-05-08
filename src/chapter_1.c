@@ -16,6 +16,9 @@ typedef struct
 
 }environment_t;
 
+void tick(environment_t* env, projectile_t* proj);
+// int main(void);
+
 void tick(environment_t* env, projectile_t* proj)
 {
   // Add position to velocity vector
@@ -26,7 +29,7 @@ void tick(environment_t* env, projectile_t* proj)
   add_tuple(&proj->velocity, &env->wind);
 }
 
-int main() 
+int main(void) 
 {
   projectile_t* p = (projectile_t*)calloc(1, sizeof(projectile_t));
   environment_t* env = (environment_t*)calloc(1, sizeof(environment_t));

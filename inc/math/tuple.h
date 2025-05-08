@@ -8,6 +8,7 @@
 #define W_VECTOR        0.0                   /* the w component value for a vecotr */
 #define vector3d        tuple_t 
 #define point3d         tuple_t
+#define color_t         tuple_t
 
 /**
  * @brief A structure composing a tuple

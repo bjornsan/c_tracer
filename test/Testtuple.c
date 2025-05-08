@@ -1,19 +1,20 @@
 #include "unity.h"
 #include <stdlib.h>
 #include "tuple.h"
+#include "color.h"
 
 
-void setUp()
+void setUp(void)
 {
 
 }
 
-void tearDown()
+void tearDown(void)
 {
 
 }
 
-void test_tuple_with_w_1_is_a_point()
+void test_tuple_with_w_1_is_a_point(void)
 {
     tuple_t* t = tuple(4.3, -4.2, 3.1, 1.0);
     TEST_ASSERT_EQUAL_FLOAT(4.3, t->x);
@@ -24,7 +25,7 @@ void test_tuple_with_w_1_is_a_point()
     TEST_ASSERT_FALSE(is_vector(t));
 }
 
-void test_tuple_with_w_0_is_a_vector()
+void test_tuple_with_w_0_is_a_vector(void)
 {
     tuple_t* t = tuple(4.3, -4.2, 3.1, 0.0);
     TEST_ASSERT_EQUAL_FLOAT(4.3, t->x);
@@ -35,18 +36,17 @@ void test_tuple_with_w_0_is_a_vector()
     TEST_ASSERT_TRUE(is_vector(t));
 }
 
-void test_creates_tuples_with_w_1()
+void test_creates_tuples_with_w_1(void)
 {
     TEST_ASSERT_TRUE(tuple_is_equal(point(4.0, -4.0, 3.0), tuple(4.0, -4.0, 3.0, 1.0)));
 }
 
-void test_creates_tuples_with_w_0()
+void test_creates_tuples_with_w_0(void)
 {
-    vector3d* v = vector(4.0, -4.0, 3.0);
     TEST_ASSERT_TRUE(tuple_is_equal(vector(4.0, -4.0, 3.0), tuple(4.0, -4.0, 3.0, 0.0)));
 }
 
-void test_add_tuple()
+void test_add_tuple(void)
 {
     tuple_t* t1 = tuple(3.0, -2.0, 5.0, 1.0);
     tuple_t* t2 = tuple(-2.0, 3.0, 1.0, 0.0);
@@ -61,7 +61,7 @@ void test_add_tuple()
     t2 = NULL;
 }
 
-void test_subtract_two_points()
+void test_subtract_two_points(void)
 {
     tuple_t* t1 = point(3.0, 2.0, 1.0);
     tuple_t* t2 = point(5.0, 6.0, 7.0);
@@ -77,7 +77,7 @@ void test_subtract_two_points()
     t2 = NULL;
 }
 
-void test_subtract_a_vector_from_a_point()
+void test_subtract_a_vector_from_a_point(void)
 {
     tuple_t* t1 = point(3.0, 2.0, 1.0);
     tuple_t* t2 = vector(5.0, 6.0, 7.0);
@@ -93,7 +93,7 @@ void test_subtract_a_vector_from_a_point()
     t2 = NULL;
 }
 
-void test_subtracting_two_vectors()
+void test_subtracting_two_vectors(void)
 {
     tuple_t* t1 = vector(3.0, 2.0, 1.0);
     tuple_t* t2 = vector(5.0, 6.0, 7.0);
@@ -109,7 +109,7 @@ void test_subtracting_two_vectors()
     t2 = NULL;
 }
 
-void test_subtracting_a_vector_from_the_zero_vector()
+void test_subtracting_a_vector_from_the_zero_vector(void)
 {
     tuple_t* t1 = vector(0.0, 0.0, 0.0);
     tuple_t* t2 = vector(1.0, -2.0, 3.0);
@@ -125,7 +125,7 @@ void test_subtracting_a_vector_from_the_zero_vector()
     t2 = NULL;
 }
 
-void test_negating_a_tuple()
+void test_negating_a_tuple(void)
 {
     tuple_t* t1 = tuple(1.0, -2.0, 3.0, -4.0);
     negate(t1);
@@ -136,7 +136,7 @@ void test_negating_a_tuple()
     t1 = NULL;
 }
 
-void test_multiplying_a_tuple_by_a_scalar()
+void test_multiplying_a_tuple_by_a_scalar(void)
 {
     tuple_t* t1 = tuple(1.0, -2.0, 3.0, -4.0);
     multiply_scalar(t1, 3.5);
@@ -145,7 +145,7 @@ void test_multiplying_a_tuple_by_a_scalar()
     t1 = NULL;
 }
 
-void test_multiplying_a_tuple_by_a_fraction()
+void test_multiplying_a_tuple_by_a_fraction(void)
 {
     tuple_t* t1 = tuple(1.0, -2.0, 3.0, -4.0);
     multiply_scalar(t1, 0.5);
@@ -154,7 +154,7 @@ void test_multiplying_a_tuple_by_a_fraction()
     t1 = NULL;
 }
 
-void test_divide_a_tuple_by_a_scalar()
+void test_divide_a_tuple_by_a_scalar(void)
 {
     tuple_t* t1 = tuple(1.0, -2.0, 3.0, -4.0);
     divide_scalar(t1, 2);
@@ -163,7 +163,7 @@ void test_divide_a_tuple_by_a_scalar()
     t1 = NULL;
 }
 
-void test_computing_the_magnitude_of_vector_1_0_0()
+void test_computing_the_magnitude_of_vector_1_0_0(void)
 {
     vector3d* v = vector(1.0, 0.0, 0.0);
     double m = magnitude(v);
@@ -172,7 +172,7 @@ void test_computing_the_magnitude_of_vector_1_0_0()
     v = NULL;
 }
 
-void test_computing_the_magnitude_of_vector_0_1_0()
+void test_computing_the_magnitude_of_vector_0_1_0(void)
 {
     vector3d* v = vector(0.0, 1.0, 0.0);
     double m = magnitude(v);
@@ -181,7 +181,7 @@ void test_computing_the_magnitude_of_vector_0_1_0()
     v = NULL;
 }
 
-void test_computing_the_magnitude_of_vector_0_0_1()
+void test_computing_the_magnitude_of_vector_0_0_1(void)
 {
     vector3d* v = vector(0.0, 0.0, 1.0);
     double m = magnitude(v);
@@ -190,7 +190,7 @@ void test_computing_the_magnitude_of_vector_0_0_1()
     v = NULL;
 }
 
-void test_computing_the_magnitude_of_vector_1_2_3()
+void test_computing_the_magnitude_of_vector_1_2_3(void)
 {
     vector3d* v = vector(1.0, 2.0, 3.0);
     double m = magnitude(v);
@@ -199,7 +199,7 @@ void test_computing_the_magnitude_of_vector_1_2_3()
     v = NULL;
 }
 
-void test_computing_the_magnitude_of_vector_n1_n2_n3()
+void test_computing_the_magnitude_of_vector_n1_n2_n3(void)
 {
     vector3d* v = vector(-1.0, -2.0, -3.0);
     double m = magnitude(v);
@@ -208,7 +208,7 @@ void test_computing_the_magnitude_of_vector_n1_n2_n3()
     v = NULL;
 }
 
-void test_normalizing_vector_4_0_0_gives_1_0_0()
+void test_normalizing_vector_4_0_0_gives_1_0_0(void)
 {
     vector3d* v = vector(4.0, 0.0, 0.0);
     normal(v);
@@ -217,16 +217,16 @@ void test_normalizing_vector_4_0_0_gives_1_0_0()
     v = NULL;
 }
 
-void test_normalizing_vector_1_2_3()
+void test_normalizing_vector_1_2_3(void)
 {
     vector3d* v = vector(1.0, 2.0, 3.0);
     normal(v);
-    TEST_ASSERT(tuple_is_equal(v, vector(1/sqrt(14), 1/sqrt(14), 1/sqrt(14))));
+    TEST_ASSERT(tuple_is_equal(v, vector(1/sqrt(14), 2/sqrt(14), 3/sqrt(14))));
     free(v);
     v = NULL;
 }
 
-void test_the_magnitude_of_a_normalized_vector()
+void test_the_magnitude_of_a_normalized_vector(void)
 {
     vector3d* v = vector(1.0, 2.0, 3.0);
     normal(v);

@@ -3,6 +3,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include "tuple.h"
+#include <stdio.h>
 
 tuple_t* tuple(double x, double y, double z, double w)
 {
@@ -28,12 +29,12 @@ vector3d* vector(double x, double y, double z)
 
 bool is_point(tuple_t* tuple)
 {
-  return tuple->w == W_POINT;
+  return fabs(tuple->w - W_POINT) < EPSILON;
 }
 
 bool is_vector(tuple_t* tuple)
 {
-  return tuple->w == W_VECTOR;
+  return fabs(tuple->w - W_VECTOR) < EPSILON;
 }
 
 void add_tuple(tuple_t* tuple, tuple_t* other) 
@@ -125,7 +126,7 @@ vector3d* cross(vector3d* v1, vector3d* v2)
 
 bool double_equals(double x, double y)
 {
-  return abs(x-y) < EPSILON;
+  return fabs(x-y) < EPSILON;
 }
 
 bool tuple_is_equal(tuple_t* t1, tuple_t* t2)
