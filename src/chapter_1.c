@@ -16,8 +16,8 @@ typedef struct
 
 }environment_t;
 
+// must declare prototype
 void tick(environment_t* env, projectile_t* proj);
-// int main(void);
 
 void tick(environment_t* env, projectile_t* proj)
 {
@@ -57,6 +57,4 @@ int main(void)
   free(env);
   free(p);
   return 0;
-
-  // investigate perf linux tool
 }
