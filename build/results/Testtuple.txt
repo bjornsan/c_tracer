@@ -1,8 +1,0 @@
-test/Testtuple.c:52:test_tuple_with_w_1_is_a_point:PASS
-test/Testtuple.c:53:test_tuple_with_w_0_is_a_vector:PASS
-test/Testtuple.c:54:test_creates_tuples_with_w_1:PASS
-test/Testtuple.c:55:test_creates_tuples_with_w_0:PASS
-
------------------------
-4 Tests 0 Failures 0 Ignored 
-OK
