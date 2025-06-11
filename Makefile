@@ -60,6 +60,7 @@ BUILD_PATHS = $(PATHB) $(PATHD) $(PATHO) $(PATHR)
 # Test source files
 SRCT = $(wildcard $(PATHT)*.c)
 RESULTS = $(patsubst $(PATHT)Test%.c,$(PATHR)Test%.txt,$(SRCT))
+# RESULTS = $(patsubst %.c,$(PATHR)%.txt,$(notdir $(SRCT)))
 
 # Sample extracted test dependencies (extend as needed)
 TEST_DEPS_Testcolor = \
@@ -73,6 +74,17 @@ TEST_DEPS_Testtuple = \
 	$(PATHO)color.o \
 	$(PATHO)tuple.o \
 	$(PATHO)unity.o
+
+TEST_DEPS_Testcanvas = \
+    $(PATHO)Testcanvas.o \
+    $(PATHO)canvas.o \
+    $(PATHO)color.o \
+		$(PATHO)tuple.o \
+    $(PATHO)unity.o
+
+print-results:
+	@echo "SRCT = $(SRCT)"
+	@echo "RESULTS = $(RESULTS)"
 
 # Default target
 all: test compile install
@@ -104,6 +116,9 @@ $(PATHB)Testcolor$(TARGET_EXTENSION): $(TEST_DEPS_Testcolor)
 	$(LINK) -o $@ $^ -lm
 
 $(PATHB)Testtuple$(TARGET_EXTENSION): $(TEST_DEPS_Testtuple)
+	$(LINK) -o $@ $^ -lm
+
+$(PATHB)Testcanvas$(TARGET_EXTENSION): $(TEST_DEPS_Testcanvas)
 	$(LINK) -o $@ $^ -lm
 
 # Object file rules

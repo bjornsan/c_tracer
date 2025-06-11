@@ -1,6 +1,5 @@
 {
   "files.associations": {
-    "calc.h": "c",
-    "lol.h": "c"
+    "*.h": "c",
   }
 }
